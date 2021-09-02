@@ -16,6 +16,8 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
+// in real-life case we will add below string into a different file
+// and will put that file in gitignore.
 const secret = "This_is_secreat_string";
 userSchema.plugin(encrypt, { secret : secret , encryptedFields : ['password']});
 
