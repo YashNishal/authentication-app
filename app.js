@@ -1,4 +1,5 @@
 //jshint esversion:6
+require('dotenv').config();
 const express = require('express');
 const ejs = require('ejs');
 const mongoose = require("mongoose");
@@ -16,10 +17,8 @@ const userSchema = new mongoose.Schema({
     password: String
 });
 
-// in real-life case we will add below string into a different file
-// and will put that file in gitignore or use as dotenv
-const secret = "This_is_secreat_string";
-userSchema.plugin(encrypt, { secret : secret , encryptedFields : ['password']});
+
+userSchema.plugin(encrypt, { secret : process.env.SECRET , encryptedFields : ['password']});
 
 
 const User = mongoose.model("User",userSchema);
